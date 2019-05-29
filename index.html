@@ -3,7 +3,6 @@
 <!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-
    <!--- basic page needs
    ================================================== -->
    <meta charset="utf-8">
@@ -20,6 +19,8 @@
    <link rel="stylesheet" href="css/base.css">  
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/vendor.css">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
    <!-- script
    ================================================== -->   
 	<script src="js/modernizr.js"></script>
@@ -41,17 +42,12 @@
    		<div class="top-bar">
    			<a class="menu-toggle" href="#"><span>Menu</span></a>
 
-	   		<div class="logo">
-		         <a href="index.html">iocfernando</a>
-		      </div>		      
-
 		   	<nav id="main-nav-wrap">
 					<ul class="main-navigation">
 						<li class="current"><a class="smoothscroll"  href="#intro" title="">Home</a></li>
 						<li><a class="smoothscroll"  href="#about" title="">About</a></li>
 						<li><a class="smoothscroll"  href="#resume" title="">Resume</a></li>
-						<!--<li><a class="smoothscroll"  href="#portfolio" title="">Portfolio</a></li>	-->
-						<!--<li><a class="smoothscroll"  href="#services" title="">Services</a></li>	-->		
+						<li><a class="smoothscroll"  href="#project" title="">Projects</a></li>
 						<li><a class="smoothscroll"  href="#contact" title="">Contact</a></li>	
 						<!--<li><a href="styles.html" title="">Style Demo</a></li>			-->	
 					</ul>
@@ -81,6 +77,7 @@
 	   			</p>
 
 	   			<a class="button stroke smoothscroll" href="#about" title="">More About Me</a>
+					
 
 	   		</div>  
    			
@@ -88,9 +85,9 @@
    	</div> <!-- /intro-content --> 
 
    	<ul class="intro-social">        
-		 		 <li><a href="https://github.com/iocfinc"><i class="fa fa-github"></i></a></li>
-         <li><a href="https://www.linkedin.com/in/iraoliverfernandoph/"><i class="fa fa-linkedin"></i></a></li>
-         <li><a href="https://www.instagram.com/iocfinc/"><i class="fa fa-instagram"></i></a></li>
+		<li><a href="https://github.com/iocfinc"><span class="fab fa-github-alt"></span></a></li>
+        <li><a href="https://www.linkedin.com/in/iraoliverfernandoph/"><span class="fab fa-linkedin"></span></a></li>
+        <li><a href="https://www.instagram.com/iocfinc/"><span class="fab fa-instagram"></span></a></li>
 				 <!--<li><a href="#"><i class="fa fa-behance"></i></a></li>-->
          <!--<li><a href="#"><i class="fa fa-twitter"></i></a></li>-->
          <!--<li><a href="#"><i class="fa fa-dribbble"></i></a></li>-->
@@ -110,8 +107,8 @@
    			<h1>Let me introduce myself.</h1>
 
    			<div class="intro-info">
-
-   				<img src="images/profile.png" alt="Profile Picture">
+				
+   				<img src="images/Profile.png" alt="Profile Picture">
 
    				<p class="lead">I am an Electronics Engineering graduate from the Philippines. Greatly interested in Deep Learning and its applications. A graduate of Udacity's Deep Learning Nanodegree. Lucky to be chosen as one of the 300 Spartans of the Pytorch Udacity Scholarship. I am currently experimenting with deploying Deep Learning models to web applications. Actively looking for opportunities in the field of Deep Learning and AI.</p>
    			</div>   			
@@ -186,12 +183,13 @@
 
    	<div class="row button-section">
    		<div class="col-twelve">
-   			<a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
+   			<a href="#contact" title="Hire Me" class="button stroke smoothscroll">Contact Me</a>
    			<!--<a href="#" title="Download CV" class="button button-primary">Download CV</a>-->
    		</div>   		
    	</div>
 
-   </section> <!-- /process-->    
+   </section> <!-- /process-->
+	 <!--END OF SECTION-->    
 
 
    <!-- resume Section
@@ -229,7 +227,7 @@
 
 	   				<div class="timeline-header">
 	   					<h3>Technology Consultant</h3>
-	   					<p>May 2017 - Present</p>
+	   					<p>May 2017 - May 2019</p>
 	   				</div>
 
 	   				<div class="timeline-content">
@@ -380,583 +378,83 @@
    		</div> <!-- /col-twelve -->
    		
    	</div> <!-- /resume-timeline -->
-		
 	</section> <!-- /features -->
-<!-- COMMENTING OUT THIS SECTION - WIP
-	<!-- Portfolio Section
-   ================================================== ->
-	<section id="portfolio">
 
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Portfolio</h5>
-   			<h1>Check Out Some of My Works.</h1>
-
-   			<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>
-
-   		</div>   		
-   	</div> <!-- /section-intro-> 
-
-   	<div class="row portfolio-content">
-
-   		<div class="col-twelve">
-
-   			<!-- portfolio-wrapper ->
-	         <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
-
-	         	<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/liberty.jpg" alt="Liberty">
-	                  <a href="#modal-01" class="overlay">	                  	           
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-		     					       <h3 class="folio-title">Liberty</h3>	     					    
-		     					    	 <span class="folio-types">
-		     					       	  Graphic Design
-		     					       </span>
-		     					   </div>	                      	
-	                     </div>                    
-	                  </a>
-	               </div>	               
-	        		</div> <!-- /folio-item ->
-
-	        		<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/shutterbug.jpg" alt="Shutterbug">
-	               	<a href="#modal-02" class="overlay">              		                  
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Shutterbug</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Web Design
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item ->
-
-	            <div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/clouds.jpg"alt="Clouds">
-	                  <a href="#modal-03" class="overlay">             		                  
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Clouds</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Web Design
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item ->
-
-	            <div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/beetle.jpg" alt="Beetle">
-	                  <a href="#modal-04" class="overlay">                  	                 
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Beetle</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Branding
-		     					      </span>		     		
-		     					   </div>  	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item ->     
-
-	        		<div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/lighthouse.jpg" alt="Lighthouse">
-	                  <a href="#modal-05" class="overlay">             		                  
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Lighthouse</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Web Development
-		     					      </span>		     		
-		     					   </div> 	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item ->
-
-	            <div class="bgrid folio-item">
-	               <div class="item-wrap">
-	               	<img src="images/portfolio/salad.jpg" alt="Salad">
-	                  <a href="#modal-06" class="overlay">
-	                     <div class="folio-item-table">
-	                     	<div class="folio-item-cell">
-	                     		<h3 class="folio-title">Salad</h3>	     					    
-		     					    	<span class="folio-types">
-		     					       	  Branding
-		     					      </span>		     		
-		     					   </div>	                      	
-	                     </div>                    
-	                  </a>
-	               </div>
-	        		</div> <!-- /folio-item ->   
-
-	            <!-- modal popups - begin
-	            ============================================================= ->
-	            <div id="modal-01" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-liberty.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Liberty</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Web Development</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-01 ->
-
-				   <div id="modal-02" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-shutterbug.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Shutterbug</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Web Design</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-02 ->
-
-				   <div id="modal-03" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-clouds.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Clouds</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Web Design</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-03 ->
-
-				   <div id="modal-04" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-beetle.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Beetle</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Branding</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-04 ->
-
-				   <div id="modal-05" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-lighthouse.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Lighthouse</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Web Development</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-05 ->
-
-				   <div id="modal-06" class="popup-modal slider mfp-hide">	
-
-				     	<div class="media">
-				     		<img src="images/portfolio/modals/m-salad.jpg" alt="" />
-				     	</div>      	
-
-					   <div class="description-box">
-					      <h4>Salad</h4>		      
-					      <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.</p>
-
-					      <div class="categories">Branding</div>			               
-					   </div>
-
-			         <div class="link-box">
-			            <a href="http://www.behance.net">Details</a>
-					      <a href="#" class="popup-modal-dismiss">Close</a>
-			         </div>		      
-
-				   </div> <!-- /modal-06 ->
-
-
-				   <!-- modal popups - end
-	            ============================================================= ->
-
-	         </div> <!-- /portfolio-wrapper -> 
-
-   		</div>  <!-- /twelve ->   
-
-   	</div> <!-- /portfolio-content -> 
+	<!--================================================== -->
+<section id ="project">
+	<div class='overlay'></div>
+	<div class="row section-intro">
+		<div class='col-twelve'>
+			<h5>Projects</h5>
+			<h1>Things that I have completed</h1>
+			<p class="lead">Take a look at some projects that I have worked on during the past year. Most of these were projects I have created under the Deep Learning Nanodegree from Udacity. Some of these are pet projects that I have done to reinforce some concepts I have learned so far.</p>
+		</div>
+	</div> <!-- End of top intro section -->
+	<div class='row services-content'>
+		<div id='owl-slider' class='owl-carousel services-list'>
 		
-	</section> <!-- /portfolio -> 
 
-	<!-- CTA Section
-   ================================================== ->
-	<section id="cta" class="grey-section">
-
-   	<div class="row cta-content">
-
-   		<div class="col-twelve section-ads">  
-
-	     		<h2 class="h01"><a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Styleshout Recommends Dreamhost.</a></h2>
-
-		      <p class="lead">
-		      Looking for an awesome and reliable webhosting? Try <a href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT"><span>DreamHost</span></a>.
-				Get <span>$50 off</span> when you sign up with the promocode <span>styleshout</span>. 
-				<!-- Simply type	the promocode in the box labeled “Promo Code” when placing your order. ->	
-				</p>
-
-				<div class="action">
-			      <a class="button button-primary large" href="http://www.dreamhost.com/r.cgi?287326|STYLESHOUT">Sign Up Now</a>
-		      </div>		     	
-
-   		</div>
-
-   	</div> <!-- /cta-content ->
-
-   </section> <!-- /cta -> 
-
-	END OF PORTFOLIO SECTION  UNCOMMENT THIS WHEN READY To Work on this module again-->
-	<!--COMMENTING OUT SERVICES SECTION - WIP
-	<!-- services Section
-   ================================================== ->
-	<section id="services">
-
-		<div class="overlay"></div>
-
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Services</h5>
-   			<h1>What Can I Do For You?</h1>
-
-   			<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>
-
-   		</div>   		
-   	</div> <!-- /section-intro ->
-
-   	<div class="row services-content">
-
-   		<div id="owl-slider" class="owl-carousel services-list">
-
-	      	<div class="service">	
-
-	      		<span class="icon"><i class="icon-earth"></i></span>            
-
-	            <div class="service-content">	
-
-	            	 <h3>Webdesign</h3>
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	         		</p>
-	         		
-	         	</div> 	         	 
-
-				</div> <!-- /service ->
-
-				<div class="service">	
-
-					<span class="icon"><i class="icon-window"></i></span>                          
-
-	            <div class="service-content">	
-
-	            	<h3>Web Development</h3>  
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	         		</p>
-
-	            </div>	                          
-
-			   </div> <!-- /service ->
-
-			   <div class="service">
-
-			   	<span class="icon"><i class="icon-paint-brush"></i></span>		            
-
-	            <div class="service-content">
-
-	            	<h3>Branding</h3>
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	        			</p> 
-
-	            </div> 	            	               
-
-			   </div> <!-- /service ->
-
-				<div class="service">
-
-					<span class="icon"><i class="icon-toggles"></i></span>	              
-
-	            <div class="service-content">
-
-	            	<h3>UI/UX Design</h3>
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	         		</p> 
-	         		
-	            </div>                
-
-				</div> <!-- /service ->
-
-			   <div class="service">
-
-			   	<span class="icon"><i class="icon-image"></i></span>	            
-
-	            <div class="service-content">
-
-	            	<h3>Graphics Design</h3>
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	        			</p> 
-
-	            </div>	               
-
-			   </div> <!-- /service ->
-
-			   <div class="service">
-
-			   	<span class="icon"><i class="icon-chat"></i></span>	   	           
-
-	            <div class="service-content">
-
-	            	 <h3>Consultancy</h3>
-
-		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
-	        			</p> 
-	        			
-	            </div>	               
-
-			   </div> <!-- /service ->
-
-	      </div> <!-- /services-list ->
-   		
-   	</div> <!-- /services-content ->
-		
-	</section> <!-- /services ->	
--->
-<!--COMMENTING OUT - WIP - STATS SECTIONS
-	<!-- stats Section
-   ================================================== ->
-	<section id="stats" class="count-up">
-
-		<div class="row">
-			<div class="col-twelve">
-
-				<div class="block-1-6 block-s-1-3 block-tab-1-2 block-mob-full stats-list">
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-pencil-ruler"></i>
-						</div>
-
-						<h3 class="stat-count">
-							1500
-						</h3>
-
-						<h5 class="stat-title">
-							Projects Completed
-						</h5>
-
-					</div> <!-- /stat ->					
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-users"></i>
-						</div>
-
-						<h3 class="stat-count">
-							900
-						</h3>
-
-						<h5 class="stat-title">
-							Happy Clients
-						</h5>
-
-					</div> <!-- /stat ->
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-badge"></i>
-						</div>
-
-						<h3 class="stat-count">
-							200
-						</h3>
-
-						<h5 class="stat-title">
-							Awards Received
-						</h5>
-
-					</div> <!-- /stat ->									
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-light-bulb"></i>
-						</div>
-
-						<h3 class="stat-count">
-							120
-						</h3>
-
-						<h5 class="stat-title">
-							Crazy Ideas
-						</h5>
-
-					</div> <!-- /stat ->
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-cup"></i>
-						</div>
-
-						<h3 class="stat-count">
-							1500
-						</h3>
-
-						<h5 class="stat-title">
-							Coffee Cups
-						</h5>
-
-					</div> <!-- /stat ->
-
-					<div class="bgrid stat">
-
-						<div class="icon-part">
-							<i class="icon-clock"></i>
-						</div>
-
-						<h3 class="stat-count">
-							7200
-						</h3>
-
-						<h5 class="stat-title">
-							Hours
-						</h5>
-
-					</div> <!-- /stat ->
-
-				</div> <!-- /stats-list ->
-
-			</div> <!-- /twelve ->
-		</div> <!-- /row ->
-
-	</section> <!-- /stats ->
-
-END OF CONTACT SECTION-->
-   <!-- contact
-   ================================================== -->
+		<div class='service'>
+			<span class="icon"><a href="https://iocfinc-base.herokuapp.com/sentiment_analyzer"><i class="fab fa-imdb"></i></a></span>
+			
+			<a href="/sentiment_analyzer">
+				<h3>Sentiment Analyzer</h3>
+			</a>
+			<p class='desc' align=justify>
+				Trained a text classifier to predict the sentiment based on the input text. Using spaCy, I have created a lightweight model that can classify a text as either positive or negative. This was trained using the IMDB review dataset. Want to check a simple demo? Click on the icon above.
+			</p>
+		</div> <!-- End of Service One-Entry in the Slider(3entries)-->	
+
+		<div class='service'>
+			<span class="icon"><a href="https://github.com/iocfinc/Udacity-Quadcopter-RL"><i class="fas fa-helicopter"></i></a></span>
+			
+			<a href="https://github.com/iocfinc/Udacity-Quadcopter-RL">
+				<h3>Quadcopter Controls</h3>
+			</a>
+			<p class='desc' align=justify>
+				What I have done was to implement a Deep Deterministic Policy Gradient (DDPG) model as a controller for a quadcopter. The objective I chose was for the agent to move and hover to a position defined. I have created a reward function that accounts for the velocity and relative distance between the agent and the objective.
+			</p>
+		</div> <!-- End of Service One-Entry in the Slider(3entries)-->	
+
+		<div class='service'>
+			<span class="icon"><a href="https://github.com/iocfinc/Super_SloMo_Implementation"><i class="fas fa-video"></i></a></span>
+			
+			<a href="https://github.com/iocfinc/Super_SloMo_Implementation">
+				<h3>Super Slo Mo</h3>
+			</a>
+			<p class='desc' align=justify>
+				A fork on the implementation of the paper  Super SloMo: High-Quality Estimation of Multiple Intermediate Frames for Video Interpolation. The model in this script can convert video inputs into multiple interpolated frame outputs which can then be compressed into framerates to make the output appear slow-moving or increase the output framerate from the original.
+			</p>
+		</div> <!-- End of Service One-Entry in the Slider(3entries)-->	
+
+		<div class='service'>
+			<span class="icon"><a href="https://github.com/iocfinc/Udacity-FB-Flowers-CNN"><i class="fas fa-seedling"></i></a></span>
+			
+			<a href="https://github.com/iocfinc/Udacity-FB-Flowers-CNN">
+				<h3>Flower Classifier</h3>
+			</a>
+			<p class='desc' align=justify>
+				The goal of this project is to showcase what we have learned in the first phase of the challenge which covered an introduction to PyTorch, PyTorch basics and the different deep learning models with coding in PyTorch. For this project, we are asked to create a classifier model that would be able to output the predicted category of a flower among 102 categories.
+			</p>
+		</div> <!-- End of Service One-Entry in the Slider(3entries)-->	
+
+		<div class='service'>
+			<span class="icon"><a href="https://github.com/iocfinc/Udacity-Scrip_Generator-RNN"><i class="fas fa-scroll"></i></a></span>
+			
+			<a href="https://github.com/iocfinc/Udacity-Scrip_Generator-RNN">
+				<h3>Script Generator</h3>
+			</a>
+			<p class='desc' align=justify>
+				This project is an implementation of an RNN that can continue creating a script based on the original input text. The sample script for this project is on a scene from The Simpsons series. The generated text showed some unusual results and made a scene that appeared to have continuity from the original script.
+			</p>
+		</div> <!-- End of Service One-Entry in the Slider(3entries)-->	
+
+		</div> <!-- End of owl slider ROW -->
+	</div> <!-- End of Services content section -->
 	
-<!-- REMOVING Contact section - Email action
-	<section id="contact">
+</section>
+  <!--================================================== ->
 
-		<div class="row section-intro">
-   		<div class="col-twelve">
-
-   			<h5>Contact</h5>
-   			<h1>I'd Love To Hear From You.</h1>
-
-   			<p class="lead">I am currently looking for employment in the field of AI/Deep Learning. If you have </p>
-
-   		</div> 
-   	</div> <!-- /section-intro ->
-
-   	<div class="row contact-form">
-
-   		<div class="col-twelve">
-
-            <!-- form ->
-            <form name="contactForm" id="contactForm" method="post" action="">
-      			<fieldset>
-
-                  <div class="form-field">
- 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
-                  </div>
-                  <div class="form-field">
-	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
-	               </div>
-                  <div class="form-field">
-	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
-	               </div>                       
-                  <div class="form-field">
-	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
-	               </div>                      
-                 <div class="form-field">
-                     <button class="submitform">Submit</button>
-                     <div id="submit-loader">
-                        <div class="text-loader">Sending...</div>                             
-       				      <div class="s-loader">
-								  	<div class="bounce1"></div>
-								  	<div class="bounce2"></div>
-								  	<div class="bounce3"></div>
-								</div>
-							</div>
-                  </div>
-
-      			</fieldset>
-      		</form> <!-- Form End ->
-
-            <!-- contact-warning ->
-            <div id="message-warning">            	
-            </div>            
-            <!-- contact-success ->
-      		<div id="message-success">
-               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-      		</div>
-
-         </div> <!-- /col-twelve ->
-   		
-   	</div> <!-- /contact-form ->
 
 UNCOMMENT IF NEEDED-->
 		<section id="contact">
@@ -1007,8 +505,7 @@ UNCOMMENT IF NEEDED-->
 	</section> <!-- /contact -->
 
 
-   <!-- footer
-   ================================================== -->
+   <!-- footer-->
 
    <footer>
      	<div class="row">
@@ -1016,9 +513,9 @@ UNCOMMENT IF NEEDED-->
      		<div class="col-six tab-full pull-right social">
 
      			<ul class="footer-social">        
-			      <li><a href="https://github.com/iocfinc"><i class="fa fa-github"></i></a></li>
-						<li><a href="https://www.linkedin.com/in/iraoliverfernandoph/"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="https://www.instagram.com/iocfinc/"><i class="fa fa-instagram"></i></a></li>
+			    	<li><a href="https://github.com/iocfinc"><span class="fab fa-github-alt"></span></a></li>
+        			<li><a href="https://www.linkedin.com/in/iraoliverfernandoph/"><span class="fab fa-linkedin"></span></a></li>
+        			<li><a href="https://www.instagram.com/iocfinc/"><span class="fab fa-instagram"></span></a></li>
 			   </ul> 
 	      		
 	      </div>
@@ -1031,7 +528,7 @@ UNCOMMENT IF NEEDED-->
 	      	</div>
 
 	      	<div id="go-top">
-		         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+		         <a class="smoothscroll" title="Back to Top" href="#top"><span class="fas fa-chevron-up"></span></a>
 		      </div>
 
       	</div> <!-- /row -->     	

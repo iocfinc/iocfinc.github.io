@@ -45,6 +45,7 @@
 	/* Owl Carousel
 	------------------------------------------------------ */ 
 	$("#owl-slider").owlCarousel({
+				autoplay: 3000,
         navigation: false,
         pagination: true,
         itemsCustom : [
@@ -52,7 +53,7 @@
 	        [700, 2],
 	        [960, 3]
 	     ],
-        navigationText: false
+				navigationText: false		
     });
 
 
