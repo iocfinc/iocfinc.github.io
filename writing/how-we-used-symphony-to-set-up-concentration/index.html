@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>How We Used Symphony to Set Up a Concentration Game · Ira Fernando</title><meta name="description" content="A small memory-card game became a practical test of planning packets, Linear gates, agent workspaces, recovery loops, and public writeups."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://iocfinc.github.io/writing/how-we-used-symphony-to-set-up-concentration/"><link rel="stylesheet" href="/_astro/about.DBLBpi05.css"></head> <body> <div class="page-shell"> <header class="site-header"> <a class="site-mark" href="/">Ira Fernando</a> <nav class="site-nav" aria-label="Primary"> <a href="/writing" class="active"> Writing </a><a href="/photography"> Photography </a><a href="/work"> Work </a><a href="/about"> About </a> </nav> </header> <main>  <article class="entry-page"> <header class="entry-header"> <p class="page-kicker">Essay</p> <h1>How We Used Symphony to Set Up a Concentration Game</h1> <p class="page-deck">What a tiny game revealed about managing AI coders as a solo developer.</p> <p class="entry-stamp"> June 17, 2026 · 9 min read </p> </header> <div class="prose"> <p>The game was not the point.</p>
+<p>That is the useful thing about building a small game. If the rules are obvious, the workflow has nowhere to hide. A player sees face-down cards. They reveal two. Matching pairs stay open. Non-matches flip back. The timer starts on the first reveal. The board ends when every pair is found.</p>
+<p>The work was really a test of a development operating loop: can a rough idea move from planning packet to Linear story, from Linear story to an agent workspace, from agent output to validation evidence, and from validation evidence to a public explanation?</p>
+<p>That is what Symphony is for.</p>
+<h2 id="the-pipeline-starts-before-the-coding-prompt">The pipeline starts before the coding prompt</h2>
+<p>The first decision was to keep the product idea small and the planning surface explicit.</p>
+<p>The planning packet lived in CodexSkills, not in the product repo. That mattered because the packet was not only for this game. It was a reusable way to capture product intent, technical decisions, acceptance criteria, failure modes, and launch instructions before asking an agent to write code.</p>
+<p>For this demo, the packet covered the classic memory-card game, usually called <strong>Concentration</strong>:</p>
+<ul>
+<li>cards start face down;</li>
+<li>the player can reveal at most two cards;</li>
+<li>matching pairs remain revealed;</li>
+<li>non-matching pairs flip back after a short delay;</li>
+<li>input locks while the mismatch resolves;</li>
+<li>moves count completed two-card attempts;</li>
+<li>the timer starts on the first reveal and stops on win;</li>
+<li>restart resets the board, timer, moves, lockout state, and win state.</li>
+</ul>
+<p>Those rules became the product contract. They were simple enough to test, but strict enough to catch drift.</p>
+<h2 id="linear-became-the-queue-not-the-plan">Linear became the queue, not the plan</h2>
+<p>Linear stayed useful because it did not have to carry the whole brain of the project.</p>
+<p>The Story said what uncertainty we were resolving: can Symphony take a fresh product idea from planning packet to agent-ready implementation? The Tasks then split that into preparation and implementation. That gave Symphony something concrete to pull without turning the tracker into a dumping ground for half-formed context.</p>
+<p>The queue was filtered by labels. The Symphony config required both <code>symphony</code> and <code>agent-ready</code>, which kept the runner from grabbing every open issue in the project.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="toml"><code><span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">tracker</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">kind = </span><span style="color:#9ECBFF">&quot;linear&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">project_slug = </span><span style="color:#9ECBFF">&quot;fa7460d6223b&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">active_states = [</span><span style="color:#9ECBFF">&quot;Backlog&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Todo&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;In Progress&quot;</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">terminal_states = [</span><span style="color:#9ECBFF">&quot;Closed&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Cancelled&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Canceled&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Duplicate&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;Done&quot;</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">required_labels = [</span><span style="color:#9ECBFF">&quot;symphony&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;agent-ready&quot;</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">workspace</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">root = </span><span style="color:#9ECBFF">&quot;../../memory-card-game-demo/.symphony-workspaces&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">[</span><span style="color:#B392F0">workflow</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">file = </span><span style="color:#9ECBFF">&quot;../workflows/memory-card-game.md&quot;</span></span></code></pre>
+<p>That is the part I care about most as a solo developer managing AI coders: the agent should not be selecting from my entire ambition backlog. It should be selecting from a narrow, approved lane.</p>
+<h2 id="symphony-prepared-a-workspace-with-instructions-attached">Symphony prepared a workspace with instructions attached</h2>
+<p>The workflow file did the work that a good lead engineer would normally do before handing a ticket to someone else.</p>
+<p>It named the repo boundary. It pointed to the planning packet. It said the first slice should stay frontend-only. It listed the game rules. It named the validation commands.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="md"><code><span class="line"><span style="color:#E1E4E8">The playable demo must implement the classic Concentration memory-card matching rules:</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FFAB70">1.</span><span style="color:#E1E4E8"> Cards start face down.</span></span>
+<span class="line"><span style="color:#FFAB70">2.</span><span style="color:#E1E4E8"> A player can reveal at most two cards at a time.</span></span>
+<span class="line"><span style="color:#FFAB70">3.</span><span style="color:#E1E4E8"> Matching pairs remain revealed.</span></span>
+<span class="line"><span style="color:#FFAB70">4.</span><span style="color:#E1E4E8"> Non-matching pairs flip back after a short delay.</span></span>
+<span class="line"><span style="color:#FFAB70">5.</span><span style="color:#E1E4E8"> Input is locked while a mismatch resolves.</span></span>
+<span class="line"><span style="color:#FFAB70">6.</span><span style="color:#E1E4E8"> Moves count completed two-card attempts.</span></span>
+<span class="line"><span style="color:#FFAB70">7.</span><span style="color:#E1E4E8"> Timer starts on first reveal and stops on win.</span></span>
+<span class="line"><span style="color:#FFAB70">8.</span><span style="color:#E1E4E8"> Restart resets board, timer, moves, lockout state, and win state.</span></span></code></pre>
+<p>That instruction set is boring in the best way. It does not ask the agent to be inspired. It asks the agent to satisfy a contract.</p>
+<h2 id="the-demo-proved-the-visible-product-path">The demo proved the visible product path</h2>
+<p>The finished app is a React and Vite implementation of Concentration. The board renders face-down tiles, tracks moves and matched pairs, starts the timer on the first reveal, locks input while a mismatch resets, and shows a win state when the board clears.</p>
+<p><img src="/assets/symphony-concentration/concentration-game-desktop.png" alt="Desktop screenshot of the Concentration game showing the status panel, counters, restart button, and a face-down board."/></p>
+<p>The logic is intentionally plain. The deck builder creates pairs, gives each card a pair key, and shuffles the result.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> buildDeck</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">symbols</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> DEFAULT_SYMBOLS</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">shuffle</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> shuffleCards) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> pairedCards</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> symbols.</span><span style="color:#B392F0">flatMap</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">symbol</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">pairIndex</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=&gt;</span><span style="color:#E1E4E8"> [</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">      id: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">symbol</span><span style="color:#9ECBFF">}-${</span><span style="color:#E1E4E8">pairIndex</span><span style="color:#9ECBFF">}-a`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      pairKey: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">symbol</span><span style="color:#9ECBFF">}-${</span><span style="color:#E1E4E8">pairIndex</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      symbol,</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">    {</span></span>
+<span class="line"><span style="color:#E1E4E8">      id: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">symbol</span><span style="color:#9ECBFF">}-${</span><span style="color:#E1E4E8">pairIndex</span><span style="color:#9ECBFF">}-b`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      pairKey: </span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">symbol</span><span style="color:#9ECBFF">}-${</span><span style="color:#E1E4E8">pairIndex</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      symbol,</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  ]);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#B392F0"> shuffle</span><span style="color:#E1E4E8">(pairedCards);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>The app state follows the rules directly: selected cards, matched cards, move count, elapsed seconds, started state, locked state, and win state. That is the level of implementation I wanted for the first pass. No backend. No accounts. No leaderboard. No monetization. Just the state machine.</p>
+<p>The mobile view also mattered. A demo that only works on the development monitor is not a demo yet.</p>
+<p><img src="/assets/symphony-concentration/concentration-game-mobile.png" alt="Mobile screenshot of the Concentration game showing the responsive status panel and the first row of cards."/></p>
+<h2 id="the-recovery-loop-mattered-as-much-as-the-happy-path">The recovery loop mattered as much as the happy path</h2>
+<p>The run was not perfectly smooth.</p>
+<p>The Symphony wrapper launched the Codex worker and created a usable scaffold, but the wrapper later became too silent. I interrupted it. That could have been written up as a failure, but it was more useful as an operating lesson.</p>
+<p>The recovery path was:</p>
+<ol>
+<li>inspect the generated workspace;</li>
+<li>run the app tests, build, and lint;</li>
+<li>fix the test isolation and fake-timer issues;</li>
+<li>correct the hidden win-banner accessibility issue;</li>
+<li>exclude <code>.symphony-workspaces</code> from root test discovery;</li>
+<li>promote the validated app from the Symphony workspace into the demo repo root;</li>
+<li>update Linear with the exact validation evidence.</li>
+</ol>
+<p>That is the real shape of agent work right now. The system can create leverage, but the lead agent still needs to inspect, recover, validate, and communicate.</p>
+<p>For a single developer, that is still valuable. The goal is not to disappear from the process. The goal is to stop carrying every step in working memory.</p>
+<h2 id="validation-made-the-handoff-real">Validation made the handoff real</h2>
+<p>The final root app passed:</p>
+<ul>
+<li><code>npm ci</code></li>
+<li><code>npm test</code></li>
+<li><code>npm run build</code></li>
+<li><code>npm run lint</code></li>
+<li>local browser smoke check at <code>http://127.0.0.1:5174/</code></li>
+</ul>
+<p>That evidence went back into Linear. The implementation task was marked Done only after the app was runnable from the root repo, not only inside the generated workspace.</p>
+<p>This is the part I want to repeat across other products: the tracker should not merely say that an agent worked. It should record what changed, where the artifact lives, which commands passed, what blocked or stalled, and what a human should review next.</p>
+<h2 id="what-this-changes-for-development">What this changes for development</h2>
+<p>Symphony gives me a way to manage AI coders without pretending I have an engineering team.</p>
+<p>The useful loop is:</p>
+<ol>
+<li>riff into a planning packet;</li>
+<li>turn the packet into resolving Stories and agent-sized Tasks;</li>
+<li>promote approved work into Linear;</li>
+<li>let Symphony find only approved candidates;</li>
+<li>create isolated workspaces;</li>
+<li>run Codex against a narrow workflow brief;</li>
+<li>validate the result;</li>
+<li>write the communication trail while the evidence is fresh.</li>
+</ol>
+<p>That last step matters more than it looks. A single developer does not only need code. They need memory. They need a record of why the product exists, what was tried, where it broke, and what should happen next.</p>
+<h2 id="the-next-version-should-become-multimodal">The next version should become multimodal</h2>
+<p>The Concentration game is a good first slice because it has an obvious extension path.</p>
+<p>One path is visual. Codex plus image generation can produce a card-art system, but only if the image work has taste controls. The useful version is not “make cute cards.” It is a creative-direction packet: style family, palette, prompt recipes, evaluator rubric, contact sheet, and a review pass that catches generic or incoherent outputs before they ship.</p>
+<p>Another path is audio. ElevenLabs or a similar voice workflow could turn card reveals, matches, encouragement, and difficulty modes into an audio library. That would make the game more multimodal for kids, adults, and anyone who benefits from sound cues. The important constraint is restraint: audio should support play, not bury it.</p>
+<p>A third path is sharing. Best scores, streaks, challenge links, family boards, and lightweight gamification could make the game more repeatable. That would need a new product packet because persistence changes the risk profile. Once scores can be saved or shared, the project is no longer just a local frontend demo.</p>
+<h2 id="the-article-is-part-of-the-system">The article is part of the system</h2>
+<p>This writeup is not separate from the development process. It is another artifact in the loop.</p>
+<p>The same evidence that closed the Linear issue also made the article easier to write: screenshots, config, game rules, validation commands, and recovery notes. The same article can feed the next planning packet: generated visuals, audio design, sharing mechanics, and a better Symphony runbook.</p>
+<p>That is the operating model I want more of.</p>
+<p>Not a perfect automation story. A visible development journey: idea, packet, issue, agent, recovery, proof, writing, next bet.</p> </div> </article>  </main> <footer class="site-footer"> <p>Observation as craft across systems, cities, and public thinking.</p> <a href="mailto:iraoliverfernando@gmail.com">iraoliverfernando@gmail.com</a> </footer> </div> </body></html>

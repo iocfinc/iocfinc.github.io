@@ -6,6 +6,14 @@ This website is intended to be deployed to improve my online presence as well as
 
 ## Change Log:
 
+**June 17, 2026: Migration staging**
+
+* Preserved the 2019 Kards-based portfolio under `/archive/legacy-2019/`.
+* Added `/archive/` as the home for older site versions during the migration.
+* Added `/games/concentration/` as a static deployment of the Symphony Concentration game demo.
+* Added `/writing/` as the first writing surface, including the Symphony Concentration build note.
+* Added navigation links from the existing home page to Writing, Games, and Archive while the broader brand/site migration is still being planned.
+
 **May 5, 2019: Initial Version (current)**
 
 * Basic webpage with About, Resume, Education, Contact section.
