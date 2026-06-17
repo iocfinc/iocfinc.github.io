@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Reviewable AI Research Workflows · Ira Fernando</title><meta name="description" content="Building an AI-assisted research desk where the artifact, quality gate, and human-review boundary are the product."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://iocfinc.github.io/work/reviewable-ai-research-workflows/"><link rel="stylesheet" href="/_astro/about.DBLBpi05.css"></head> <body> <div class="page-shell"> <header class="site-header"> <a class="site-mark" href="/">Ira Fernando</a> <nav class="site-nav" aria-label="Primary"> <a href="/writing"> Writing </a><a href="/photography"> Photography </a><a href="/work" class="active"> Work </a><a href="/about"> About </a> </nav> </header> <main>  <article class="entry-page work-page"> <header class="entry-header"> <p class="page-kicker">Work</p> <h1>Reviewable AI Research Workflows</h1> <p class="page-deck">Building an AI-assisted research desk where the artifact, quality gate, and human-review boundary are the product.</p> <p class="entry-stamp">2026 · Applied AI workflow design, evaluation, implementation</p> </header> <div class="detail-rail"> <div> <p>Outcomes</p> <ul> <li>Built a Python-first research workflow that produces CSV, JSON, HTML, and PDF artifacts for human review.</li><li>Kept the product boundary explicit: research packets and reviewable memos, not automated execution signals.</li><li>Used fixture-backed tests and report contracts to make generated outputs inspectable.</li> </ul> </div> <div> <p>Stack</p> <ul> <li>Python</li><li>CLI workflows</li><li>Agentic research</li><li>Evaluation rubrics</li><li>Report generation</li> </ul> </div> </div> <div class="prose"> <p>The product decision was to resist the easiest AI shape.</p>
+<p>A market-research assistant can look impressive if it jumps straight to recommendations. That is also the failure mode. The output may be plausible, confident, and difficult to audit. For this project, the useful product surface is not a black-box answer. It is the research packet: a generated artifact with enough structure, evidence, and boundaries for a human to inspect it.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>Options research can become a chain of ad hoc decisions: pull a chain, scan liquidity, check pricing, reason about scenarios, write a thesis, and decide what deserves review. AI can accelerate that workflow, but only if the output remains legible.</p>
+<p>The risky failure was not just a broken script. It was a plausible-looking memo that skipped a caveat, mixed up a filter, or made the next action sound more certain than the evidence allowed.</p>
+<h2 id="the-product-boundary">The Product Boundary</h2>
+<p>Quant Researcher Desk is designed as a research workflow, not an execution engine.</p>
+<p>The system can:</p>
+<ul>
+<li>ingest options-chain and market data through local workflows;</li>
+<li>rank and filter contracts for review;</li>
+<li>generate machine-readable CSV and JSON outputs;</li>
+<li>render human-readable HTML and PDF reports;</li>
+<li>preserve a review path for the person making the decision.</li>
+</ul>
+<p>The system should not:</p>
+<ul>
+<li>place trades;</li>
+<li>present generated analysis as an instruction;</li>
+<li>hide live dependency failures;</li>
+<li>make unreviewed recommendations feel final.</li>
+</ul>
+<p>That boundary is the point. In an AI workflow, the trust surface often lives between the generated artifact and the human decision.</p>
+<h2 id="the-workflow">The Workflow</h2>
+<p>The working path is intentionally split by audience.</p>
+<p>CSV and JSON outputs support repeatable machine workflows. HTML and PDF outputs support human review. Fixture-backed runs make the workflow testable without relying on live providers first. Live mode can be added only after the local artifact path is understood.</p>
+<p>The useful shape is:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>market data -&gt; ranking and filters -&gt; scenario analysis -&gt; report artifacts -&gt; human review</span></span></code></pre>
+<p>The generated report is not a final answer. It is a structured memo that makes the next review easier.</p>
+<h2 id="evaluation-surfaces">Evaluation Surfaces</h2>
+<p>The evaluation work focuses on whether the output can be trusted enough to review.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Surface</th><th>What it checks</th></tr></thead><tbody><tr><td>Fixture mode</td><td>Can the workflow run without live dependencies?</td></tr><tr><td>Artifact contract</td><td>Are CSV, JSON, HTML, and PDF outputs produced where expected?</td></tr><tr><td>Ranking and filtering</td><td>Are liquidity, volume, open interest, premium, and delta filters applied in a reviewable way?</td></tr><tr><td>Report sections</td><td>Are the required explanation, ranking, scenario, and safety sections present?</td></tr><tr><td>Failure semantics</td><td>Does live-mode failure expose the real blocker instead of pretending success?</td></tr><tr><td>Human-review boundary</td><td>Is the output framed as research support rather than an execution signal?</td></tr></tbody></table>
+<p>Local inspection found 31 test files under <code>naval-analyst/tests</code> and 64 report/data artifacts under <code>naval-analyst/reports</code> matching CSV, JSON, HTML, or PDF. Those are local artifact metrics, not production adoption metrics.</p>
+<h2 id="what-this-proves">What This Proves</h2>
+<p>This project is useful evidence for applied AI and AI product roles because it shows the product work around the model-shaped part of the system.</p>
+<p>The key decisions were product decisions:</p>
+<ul>
+<li>make outputs reviewable before making them persuasive;</li>
+<li>separate research support from automated action;</li>
+<li>test the artifact contract, not only the code path;</li>
+<li>expose operational uncertainty clearly;</li>
+<li>treat evaluation as part of the product surface.</li>
+</ul>
+<p>The strongest lesson is simple: for many AI workflows, the product is not the answer. The product is the boundary that helps a person decide whether the answer deserves trust.</p>
+<h2 id="current-limits">Current Limits</h2>
+<p>This is not production-scale deployment evidence. It does not prove enterprise adoption, revenue impact, or fully automated safety evaluation. The current proof is narrower and more concrete: a local applied-AI workflow with reviewable artifacts, explicit boundaries, and evaluation surfaces that can be discussed, tested, and improved.</p> </div> </article>  </main> <footer class="site-footer"> <p>Observation as craft across systems, cities, and public thinking.</p> <a href="mailto:iraoliverfernando@gmail.com">iraoliverfernando@gmail.com</a> </footer> </div> </body></html>
