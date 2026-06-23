@@ -4,29 +4,49 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Archive · Ira Fernando</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
       :root {
-        color: #14231c;
-        background: #f4efe5;
+        color: #f5f6fb;
+        background: #101014;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      * {
+        box-sizing: border-box;
+        min-width: 0;
       }
 
       body {
         margin: 0;
+        overflow-x: hidden;
+        width: 100%;
       }
 
       main {
         max-width: 760px;
         margin: 0 auto;
+        overflow-x: hidden;
         padding: 64px 24px;
+        width: 100%;
       }
 
       a {
-        color: #245044;
+        color: #8a7cff;
+        overflow-wrap: anywhere;
+      }
+
+      h1,
+      h2,
+      p {
+        max-width: 100%;
+        overflow-wrap: anywhere;
       }
 
       .kicker {
-        color: #9a633b;
+        color: #a8acbb;
         font-size: 0.78rem;
         font-weight: 700;
         letter-spacing: 0.12em;
@@ -34,9 +54,26 @@
       }
 
       .entry {
-        border-top: 1px solid rgba(20, 35, 28, 0.16);
+        border-top: 1px solid #30313e;
         margin-top: 32px;
         padding-top: 24px;
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 56px 20px;
+        }
+
+        h1 {
+          font-size: 2rem;
+          line-height: 1.08;
+        }
+
+        h2 {
+          font-size: 1.35rem;
+          line-height: 1.15;
+          max-width: 12ch;
+        }
       }
     </style>
   </head>
@@ -47,6 +84,8 @@
       <p>
         This archive keeps previous site surfaces available while the public
         portfolio moves toward a writing, projects, and experiments structure.
+        Some old demos are preserved as historical references rather than live
+        services.
       </p>
 
       <section class="entry">
@@ -54,6 +93,18 @@
         <p>
           The original static resume page based on the Kards template, preserved
           before the 2026 migration work began.
+        </p>
+      </section>
+
+      <section class="entry">
+        <h2>
+          <a href="/archive/retired/sentiment-analyzer/"
+            >Retired Sentiment Analyzer demo</a
+          >
+        </h2>
+        <p>
+          The Heroku-era live demo is no longer usable, so the archive keeps a
+          clear placeholder instead of a dead product claim.
         </p>
       </section>
 
