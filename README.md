@@ -6,6 +6,14 @@ This website is intended to be deployed to improve my online presence as well as
 
 ## Change Log:
 
+**June 23, 2026: DIO-69 canonical GitHub Pages recovery**
+
+* Replaced the public root and modern site sections in this repository.
+* Kept `iocfinc.github.io` as the canonical public webpage source and GitHub Pages deployment repo.
+* Preserved `/archive/`, `/archive/legacy-2019/`, and `/games/concentration/` as static public exceptions.
+* Added a retired-demo placeholder for the old Heroku Sentiment Analyzer instead of presenting the dead demo as live.
+* Future agents should work in this repository for DIO-69 and DIO-95 unless Ira explicitly promotes a separate source repo.
+
 **June 17, 2026: Migration staging**
 
 * Preserved the 2019 Kards-based portfolio under `/archive/legacy-2019/`.
