@@ -21,12 +21,14 @@ One worked example should leave the learner able to explain the approach, reject
 
 ## Outcomes and measures
 
-### Launch outcomes
+### Release outcomes
 
 - A learner can find an example by topic and level in under 20 seconds.
 - Every example supports a 5-minute scan and a 15-minute guided review.
 - Completion persists locally without requiring an account.
-- The launch library covers coding, ML reasoning, transformer internals, AI systems, and senior/FDE judgment.
+- The public library contains 100 original worked cases: 50 AI-context coding cases and 50 agentic systems-design cases.
+- The coding library maintains a visible 60/30/10 easy/medium/hard mix (30 / 15 / 5 cases).
+- Every systems case includes a workflow boundary, human-control decision, architecture sketch, evaluation lens, common failure, and follow-up.
 
 ### Product signals
 
@@ -37,13 +39,15 @@ One worked example should leave the learner able to explain the approach, reject
 
 ## Scope
 
-### MVP
+### Current release
 
 - Static, mobile-first reviewer.
 - Role/level and topic filters.
 - Worked examples with prompt, thinking questions, hints, narrated solution, complexity or trade-offs, common traps, follow-up, and transfer principle.
 - Local completion state and visible progress.
 - Four pathways: AI engineering basics, senior AI engineer, lead/staff, and FDE/AI product.
+- Search plus library, difficulty, and role filters for a 100-case corpus.
+- Original agentic scenarios spanning cited Q&A, support, finance research, conversational robots, tool use, evaluation, workflow triage, multi-agent coordination, voice, and platform governance.
 
 ### Later
 
@@ -70,27 +74,19 @@ One worked example should leave the learner able to explain the approach, reject
 
 Each example has three consumption modes: a 5-minute key-pattern review, a 15-minute walkthrough, and a later 30-minute interview simulation.
 
-## Launch set
+## Curriculum targets
 
-The target launch library is twelve polished examples:
+The first scale-up release contains two deliberately bounded libraries:
 
-1. Two Sum for embedding IDs.
-2. Merge overlapping inference windows.
-3. Top-K retrieved passages.
-4. LRU cache for model responses.
-5. Diagnose an imbalanced classifier.
-6. Prevent leakage in time-ordered data.
-7. Calculate attention by hand.
-8. Estimate KV-cache memory.
-9. Choose prompting, RAG, or fine-tuning.
-10. Design a document-question-answering service.
-11. Design a production evaluation platform.
-12. Turn an ambiguous customer workflow into an FDE pilot.
+1. **AI-context coding (50):** 30 easy, 15 medium, and 5 hard original algorithmic prompts. Each uses a familiar pattern in an AI product or infrastructure setting, without claiming to be a real company question.
+2. **Agentic systems design (50):** original prompts across grounded Q&A, support, finance research, conversational robots, typed tool use, evaluation, triage, multi-agent coordination, voice, and platforms.
+
+Every case must pass the content gate: attempt-first prompt, three thinking questions, two hints, a narrated approach, an artifact or pseudocode sketch, trade-off, plausible trap, interview follow-up, and transfer principle.
 
 ## Delivery sequence
 
-- Sprint 1: prove the study loop with seven worked examples and local progress.
-- Sprint 2: complete the twelve-example launch library and pathways.
+- Sprint 1: prove the study loop with seven worked examples and local progress. Complete.
+- Sprint 2: ship the 50/50 worked-case library, coding difficulty mix, search, and system-design depth. Complete pending browser QA and publication.
 - Sprint 3: add interview mode, bookmarks, and transfer exercises.
 - Sprint 4: conduct usability tests and make the experience accessible and launch-ready.
 - Sprint 5: add evidence-backed role/company packs and a sustainable editorial refresh process.
@@ -109,12 +105,12 @@ The target launch library is twelve polished examples:
 - The first release is a static microsite inside the existing GitHub Pages repository.
 - Content is product data, kept separate from rendering logic.
 - Progress is device-local until retention justifies accounts.
-- The launch bar is depth per example, not library size.
+- The public scale-up bar is both depth per example and a coherent 100-case corpus; content remains data-separated from rendering.
 - Notion remains the intended operational tracker; this packet is the local fallback until a live Notion write surface is available.
 
 ## Definition of epic done
 
-- Twelve examples meet the content quality gate.
+- One hundred examples meet the content quality gate, with the coding mix verified at 30 easy / 15 medium / 5 hard.
 - Four pathways are usable end to end on mobile and desktop.
 - A candidate can attempt, review, mark complete, and resume.
 - Accessibility and browser checks pass.

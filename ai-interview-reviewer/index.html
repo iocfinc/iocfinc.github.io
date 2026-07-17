@@ -16,23 +16,34 @@
     </a>
     <button class="quiet-button" id="reset-progress" type="button">Reset progress</button>
   </header>
+  <section class="reset-confirmation" id="reset-confirmation" aria-labelledby="reset-title" aria-live="polite" hidden>
+    <div>
+      <p class="kicker">Review progress</p>
+      <h2 id="reset-title">Reset every reviewed case?</h2>
+      <p>This clears progress only from this browser. Your case library will not change.</p>
+      <div class="reset-actions">
+        <button class="secondary-action" id="cancel-reset" type="button">Keep progress</button>
+        <button class="primary-action" id="confirm-reset" type="button">Reset progress <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
 
   <main>
     <section class="hero" aria-labelledby="page-title">
       <div class="hero-copy">
         <p class="kicker">Worked examples for real AI interview loops</p>
         <h1 id="page-title">Practice the reasoning behind the answer.</h1>
-        <p class="hero-lede">Seven commute-sized cases across coding, ML reasoning, transformer internals, system design, and forward-deployed leadership. Try the prompt, inspect the trade-offs, then explain the pattern aloud.</p>
+        <p class="hero-lede">One hundred original, commute-sized cases: fifty AI-context coding patterns and fifty agentic systems-design scenarios. Try the prompt, inspect the trade-offs, then explain the pattern aloud.</p>
         <a class="primary-action" href="#library">Start a worked example <span aria-hidden="true">→</span></a>
       </div>
       <aside class="study-brief" aria-label="Study progress" aria-live="polite">
         <p class="brief-label">Your local review</p>
-        <div class="progress-number"><strong id="complete-count">0</strong><span>/ <span id="total-count">7</span> complete</span></div>
-        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Examples reviewed" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0"><span id="progress-bar"></span></div>
+        <div class="progress-number"><strong id="complete-count">0</strong><span>/ <span id="total-count">100</span> complete</span></div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Examples reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
         <p id="progress-note">Start with one case. Your progress stays on this device.</p>
         <dl class="brief-stats">
-          <div><dt>Modes</dt><dd>5–20 min</dd></div>
-          <div><dt>Range</dt><dd>Basics–staff</dd></div>
+          <div><dt>Library</dt><dd>50 code / 50 systems</dd></div>
+          <div><dt>Code mix</dt><dd>60 / 30 / 10</dd></div>
         </dl>
       </aside>
     </section>
@@ -40,13 +51,13 @@
     <section class="orientation" aria-labelledby="pathways-title">
       <div>
         <p class="section-index">01 / Choose your altitude</p>
-        <h2 id="pathways-title">One library, four interview paths.</h2>
+        <h2 id="pathways-title">Two libraries, four interview paths.</h2>
       </div>
       <div class="pathway-list">
-        <p><strong>AI engineering basics</strong><span>Coding patterns, ML judgment, transformer foundations.</span></p>
-        <p><strong>Senior AI engineer</strong><span>Evaluation, reliability, adaptation, and architecture.</span></p>
-        <p><strong>Lead and staff</strong><span>Platforms, migrations, risk, economics, and team leverage.</span></p>
-        <p><strong>FDE and AI product</strong><span>Discovery, pilots, adoption, and technical product decisions.</span></p>
+        <p><strong>AI engineering basics</strong><span>Original coding patterns with AI-flavoured prompts and a spoken-reasoning loop.</span></p>
+        <p><strong>Senior AI engineer</strong><span>Tool contracts, evaluation, reliability, retrieval, and production trade-offs.</span></p>
+        <p><strong>Lead and staff</strong><span>Agent platforms, governance, risk, staged rollout, and organizational leverage.</span></p>
+        <p><strong>FDE and AI product</strong><span>Workflow discovery, human handoff, adoption, and measurable operational outcomes.</span></p>
       </div>
     </section>
 
@@ -60,12 +71,15 @@
       </div>
 
       <form class="filters" aria-label="Filter worked examples">
+        <label class="search-control" for="search-input">Search
+          <input id="search-input" type="search" placeholder="Try: graph, finance, retrieval, voice" autocomplete="off">
+        </label>
         <fieldset>
-          <legend>Topic</legend>
+          <legend>Library</legend>
           <div class="filter-row" id="topic-filters"></div>
         </fieldset>
         <fieldset>
-          <legend>Level</legend>
+          <legend>Difficulty</legend>
           <div class="filter-row" id="level-filters"></div>
         </fieldset>
         <fieldset class="role-filter">
@@ -78,7 +92,7 @@
       <div id="empty-state" class="empty-state" hidden>
         <p class="kicker">No matching case</p>
         <h3>Try a wider filter.</h3>
-        <p>The launch set is deliberately small and deep. More role pathways are mapped in the product epic.</p>
+        <p>Try a different keyword or reset the library, difficulty, and role filters.</p>
         <button class="secondary-action" id="clear-filters" type="button">Show every example</button>
       </div>
     </section>
@@ -108,7 +122,7 @@
         <section><p class="step-label">Prompt</p><p class="prompt"></p></section>
         <section><p class="step-label">Think first</p><ol class="questions"></ol></section>
         <details><summary>Need a hint?</summary><ul class="hints"></ul></details>
-        <section><p class="step-label">Reasoned solution</p><p class="solution"></p><pre><code class="code"></code></pre></section>
+        <section><p class="step-label">Worked approach</p><p class="solution"></p><p class="step-label artifact-label"></p><pre><code class="code"></code></pre></section>
         <div class="tradeoff-grid">
           <section><p class="step-label">Complexity / trade-off</p><p class="analysis"></p></section>
           <section><p class="step-label">Plausible trap</p><p class="trap"></p></section>

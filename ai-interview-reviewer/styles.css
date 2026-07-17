@@ -26,6 +26,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .wordmark { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
 .wordmark-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 11px; }
 .quiet-button, .secondary-action { border: 1px solid var(--line); background: transparent; color: var(--ink); padding: 9px 13px; cursor: pointer; transition: transform .2s ease, border-color .2s ease; }
+.reset-confirmation { position: fixed; z-index: 5; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(32 35 31 / .5); }
+.reset-confirmation[hidden] { display: none; }
+.reset-confirmation > div { width: min(100%, 540px); padding: clamp(28px, 6vw, 50px); background: var(--surface); border-top: 3px solid var(--accent); box-shadow: 0 18px 60px rgb(32 35 31 / .2); }
+.reset-confirmation h2 { margin-bottom: 18px; font-size: clamp(30px, 5vw, 48px); }
+.reset-confirmation p:not(.kicker) { color: var(--muted); }
+.reset-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .quiet-button:hover, .secondary-action:hover { border-color: var(--ink); }
 .quiet-button:active, .secondary-action:active, .primary-action:active, .reveal-button:active { transform: translateY(1px); }
 
@@ -65,6 +71,9 @@ h2 { margin-bottom: 0; font-size: clamp(34px, 4.4vw, 60px); line-height: 1.06; l
 .library-heading h2 { max-width: 760px; }
 .result-count { margin: 0; color: var(--muted); font-family: var(--mono); font-size: 12px; white-space: nowrap; }
 .filters { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px 40px; margin-bottom: 48px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.search-control { grid-column: 1 / -1; display: grid; grid-template-columns: 80px minmax(0, 1fr); align-items: center; color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.search-control input { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 0; background: var(--surface); color: var(--ink); padding: 10px 12px; font-family: "Poppins", system-ui, sans-serif; font-size: 13px; letter-spacing: 0; text-transform: none; }
+.search-control input::placeholder { color: #8a8e87; }
 .role-filter { grid-column: 1 / -1; }
 fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
 legend { float: left; width: 80px; padding: 7px 0; color: var(--muted); font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
@@ -115,6 +124,7 @@ footer a { color: var(--ink); }
   .pathway-list p { grid-template-columns: 1fr; gap: 5px; }
   .library-heading { align-items: start; flex-direction: column; }
   .filters { grid-template-columns: 1fr; gap: 20px; }
+  .search-control { grid-template-columns: 1fr; gap: 5px; }
   legend { float: none; width: auto; margin-bottom: 5px; }
   .example-summary { grid-template-columns: 38px minmax(0, 1fr); gap: 18px; }
   .example-actions { grid-column: 2; grid-template-columns: 1fr auto; align-items: center; }

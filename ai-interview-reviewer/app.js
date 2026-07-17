@@ -3,12 +3,13 @@
 
   var examples = window.INTERVIEW_EXAMPLES || [];
   var storageKey = "ai-interview-field-guide-completed-v1";
-  var state = { topic: "all", level: "all", role: "all", completed: loadCompleted() };
-  var topicLabels = { all: "All topics", coding: "Coding", ml: "ML reasoning", transformers: "Transformers", systems: "Systems", leadership: "Leadership" };
-  var levelLabels = { all: "All levels", basics: "Basics", intermediate: "Intermediate", advanced: "Advanced", staff: "Staff" };
+  var state = { topic: "all", level: "all", role: "all", query: "", completed: loadCompleted() };
+  var topicLabels = { all: "All libraries", coding: "LeetCode patterns", systems: "Agentic systems" };
+  var levelLabels = { all: "All difficulty", easy: "Easy", medium: "Medium", hard: "Hard" };
   var roleLabels = { all: "All roles", "AI engineer": "AI engineer", "Senior AI engineer": "Senior", "Lead / staff": "Lead / staff", "FDE / AI product": "FDE / AI product" };
   var list = document.getElementById("example-list");
   var template = document.getElementById("example-template");
+  var resetConfirmation = document.getElementById("reset-confirmation");
 
   function loadCompleted() {
     try {
@@ -51,10 +52,12 @@
 
   function renderExamples() {
     list.innerHTML = "";
+    var query = state.query.trim().toLowerCase();
     var visible = examples.filter(function (example) {
       return (state.topic === "all" || example.topic === state.topic) &&
         (state.level === "all" || example.level === state.level) &&
-        (state.role === "all" || example.roles.indexOf(state.role) !== -1);
+        (state.role === "all" || example.roles.indexOf(state.role) !== -1) &&
+        (!query || searchableText(example).indexOf(query) !== -1);
     });
 
     visible.forEach(function (example, index) {
@@ -79,6 +82,7 @@
       addList(node.querySelector(".questions"), example.questions);
       addList(node.querySelector(".hints"), example.hints);
       node.querySelector(".solution").textContent = example.solution;
+      node.querySelector(".artifact-label").textContent = example.artifactLabel;
       node.querySelector(".code").textContent = example.code;
       node.querySelector(".analysis").textContent = example.analysis;
       node.querySelector(".trap").textContent = example.trap;
@@ -109,6 +113,10 @@
     document.getElementById("result-count").textContent = visible.length + (visible.length === 1 ? " case" : " cases");
   }
 
+  function searchableText(example) {
+    return [example.title, example.summary, example.prompt, example.topic, example.level, example.roles.join(" ")].join(" ").toLowerCase();
+  }
+
   function updateProgress() {
     var validCompleted = state.completed.filter(function (id) { return examples.some(function (example) { return example.id === id; }); });
     var count = validCompleted.length;
@@ -125,6 +133,8 @@
     state.topic = "all";
     state.level = "all";
     state.role = "all";
+    state.query = "";
+    document.getElementById("search-input").value = "";
     document.querySelectorAll(".filter-button").forEach(function (button) { button.setAttribute("aria-pressed", String(button.dataset.value === "all")); });
     renderExamples();
   }
@@ -132,13 +142,34 @@
   makeFilters("topic-filters", topicLabels, "topic");
   makeFilters("level-filters", levelLabels, "level");
   makeFilters("role-filters", roleLabels, "role");
+  document.getElementById("search-input").addEventListener("input", function (event) {
+    state.query = event.target.value;
+    renderExamples();
+  });
   document.getElementById("clear-filters").addEventListener("click", resetFilters);
-  document.getElementById("reset-progress").addEventListener("click", function () {
-    if (state.completed.length && !window.confirm("Reset every reviewed example on this device?")) return;
+  function clearProgress() {
     state.completed = [];
     saveCompleted();
     renderExamples();
     updateProgress();
+  }
+
+  document.getElementById("reset-progress").addEventListener("click", function () {
+    if (!state.completed.length) {
+      clearProgress();
+      return;
+    }
+    resetConfirmation.hidden = false;
+    document.getElementById("cancel-reset").focus();
+  });
+  document.getElementById("cancel-reset").addEventListener("click", function () {
+    resetConfirmation.hidden = true;
+    document.getElementById("reset-progress").focus();
+  });
+  document.getElementById("confirm-reset").addEventListener("click", function () {
+    clearProgress();
+    resetConfirmation.hidden = true;
+    document.getElementById("reset-progress").focus();
   });
   renderExamples();
   updateProgress();
