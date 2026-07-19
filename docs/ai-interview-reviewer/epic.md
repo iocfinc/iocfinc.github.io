@@ -81,7 +81,7 @@ The first scale-up release contains two deliberately bounded libraries:
 1. **AI-context coding (50):** 30 easy, 15 medium, and 5 hard original algorithmic prompts. Each uses a familiar pattern in an AI product or infrastructure setting, without claiming to be a real company question.
 2. **Agentic systems design (50):** original prompts across grounded Q&A, support, finance research, conversational robots, typed tool use, evaluation, triage, multi-agent coordination, voice, and platforms.
 
-Every case must pass the content gate: attempt-first prompt, three thinking questions, two hints, a narrated approach, an artifact or pseudocode sketch, trade-off, plausible trap, interview follow-up, and transfer principle.
+Every coding case must pass the content gate: attempt-first prompt, three thinking questions, two hints, a Python 3 narrated approach and solution pattern, trade-off, plausible trap, interview follow-up, and transfer principle. Systems cases use an architecture sketch with the same reasoning structure.
 
 ## Delivery sequence
 

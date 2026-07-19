@@ -3,14 +3,14 @@
 ## Released scope
 
 - 100 original worked examples in `ai-interview-reviewer/examples.js`.
-- 50 AI-context coding cases: 30 easy, 15 medium, and 5 hard.
+- 50 Python-first AI-context coding cases: 30 easy, 15 medium, and 5 hard.
 - 50 agentic systems-design cases covering grounded Q&A, support, finance research, conversational robots, typed tools, evaluation, triage, multi-agent coordination, voice, and governed platforms.
 - Search plus library, difficulty, and role filters.
 - Case-level progressive disclosure, local completion state, accessible filter state, and an explicit reset action.
 
 ## Content contract
 
-Every record includes a prompt, three thinking questions, two hints, narrated solution, pseudocode or architecture sketch, trade-off, plausible trap, follow-up, and transferable principle. Scenarios are original practice material, not leaked interview questions.
+Every record includes a prompt, three thinking questions, two hints, narrated solution, Python 3 solution pattern or architecture sketch, trade-off, plausible trap, follow-up, and transferable principle. Scenarios are original practice material, not leaked interview questions.
 
 ## Publication checklist
 
