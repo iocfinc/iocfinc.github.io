@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Python-first worked examples for AI engineering and agentic systems-design interviews.">
+  <title>AI Interview Field Guide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#library">Skip to examples</a>
+  <header class="site-header">
+    <a class="wordmark" href="../index.html" aria-label="Back to Ira Oliver Fernando portfolio">
+      <span class="wordmark-mark" aria-hidden="true">IF</span>
+      <span>AI Interview Field Guide</span>
+    </a>
+    <button class="quiet-button" id="reset-progress" type="button">Reset progress</button>
+  </header>
+  <section class="reset-confirmation" id="reset-confirmation" aria-labelledby="reset-title" aria-live="polite" hidden>
+    <div>
+      <p class="kicker">Review progress</p>
+      <h2 id="reset-title">Reset every reviewed case?</h2>
+      <p>This clears progress only from this browser. Your case library will not change.</p>
+      <div class="reset-actions">
+        <button class="secondary-action" id="cancel-reset" type="button">Keep progress</button>
+        <button class="primary-action" id="confirm-reset" type="button">Reset progress <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="kicker">Python-first worked examples for real AI interview loops</p>
+        <h1 id="page-title">Practice the reasoning behind the answer.</h1>
+        <p class="hero-lede">One hundred original, commute-sized cases: fifty Python worked solutions and fifty agentic systems-design scenarios. Try the prompt, inspect the trade-offs, then explain the pattern aloud.</p>
+        <a class="primary-action" href="#library">Start a worked example <span aria-hidden="true">→</span></a>
+      </div>
+      <aside class="study-brief" aria-label="Study progress" aria-live="polite">
+        <p class="brief-label">Your local review</p>
+        <div class="progress-number"><strong id="complete-count">0</strong><span>/ <span id="total-count">100</span> complete</span></div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Examples reviewed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
+        <p id="progress-note">Start with one case. Your progress stays on this device.</p>
+        <dl class="brief-stats">
+          <div><dt>Library</dt><dd>50 Python / 50 systems</dd></div>
+          <div><dt>Code mix</dt><dd>60 / 30 / 10</dd></div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="orientation" aria-labelledby="pathways-title">
+      <div>
+        <p class="section-index">01 / Choose your altitude</p>
+        <h2 id="pathways-title">Two libraries, four interview paths.</h2>
+      </div>
+      <div class="pathway-list">
+        <p><strong>AI engineering basics</strong><span>Original Python coding patterns with AI-flavoured prompts and a spoken-reasoning loop.</span></p>
+        <p><strong>Senior AI engineer</strong><span>Tool contracts, evaluation, reliability, retrieval, and production trade-offs.</span></p>
+        <p><strong>Lead and staff</strong><span>Agent platforms, governance, risk, staged rollout, and organizational leverage.</span></p>
+        <p><strong>FDE and AI product</strong><span>Workflow discovery, human handoff, adoption, and measurable operational outcomes.</span></p>
+      </div>
+    </section>
+
+    <section class="library" id="library" tabindex="-1" aria-labelledby="library-title">
+      <div class="library-heading">
+        <div>
+          <p class="section-index">02 / Proof library</p>
+          <h2 id="library-title">Select a case. Think before you reveal.</h2>
+        </div>
+        <p id="result-count" class="result-count" aria-live="polite"></p>
+      </div>
+
+      <form class="filters" aria-label="Filter worked examples">
+        <label class="search-control" for="search-input">Search
+          <input id="search-input" type="search" placeholder="Try: graph, finance, retrieval, voice" autocomplete="off">
+        </label>
+        <fieldset>
+          <legend>Library</legend>
+          <div class="filter-row" id="topic-filters"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Difficulty</legend>
+          <div class="filter-row" id="level-filters"></div>
+        </fieldset>
+        <fieldset class="role-filter">
+          <legend>Role</legend>
+          <div class="filter-row" id="role-filters"></div>
+        </fieldset>
+      </form>
+
+      <div id="example-list" class="example-list"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <p class="kicker">No matching case</p>
+        <h3>Try a wider filter.</h3>
+        <p>Try a different keyword or reset the library, difficulty, and role filters.</p>
+        <button class="secondary-action" id="clear-filters" type="button">Show every example</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Original practice scenarios. No leaked interview questions. Progress is stored only in your browser.</p>
+    <a href="../docs/ai-interview-reviewer/epic.md">Read the product epic</a>
+  </footer>
+
+  <template id="example-template">
+    <article class="example">
+      <div class="example-summary">
+        <div class="example-number" aria-hidden="true"></div>
+        <div class="example-main">
+          <div class="example-meta"><span class="example-eyebrow"></span><span class="example-level"></span><span class="example-time"></span></div>
+          <h3 class="example-title"></h3>
+          <p class="example-description"></p>
+          <p class="example-roles"></p>
+        </div>
+        <div class="example-actions">
+          <button class="reveal-button" type="button" aria-expanded="false">Open case <span aria-hidden="true">+</span></button>
+          <label class="complete-control"><input type="checkbox"><span>Reviewed</span></label>
+        </div>
+      </div>
+      <div class="walkthrough" hidden>
+        <section><p class="step-label">Prompt</p><p class="prompt"></p></section>
+        <section><p class="step-label">Think first</p><ol class="questions"></ol></section>
+        <details><summary>Need a hint?</summary><ul class="hints"></ul></details>
+        <section><p class="step-label">Worked approach</p><p class="solution"></p><p class="step-label artifact-label"></p><pre><code class="code"></code></pre></section>
+        <div class="tradeoff-grid">
+          <section><p class="step-label">Complexity / trade-off</p><p class="analysis"></p></section>
+          <section><p class="step-label">Plausible trap</p><p class="trap"></p></section>
+        </div>
+        <section class="follow-up"><p class="step-label">Interviewer follow-up</p><p class="follow-up-copy"></p></section>
+        <section class="transfer"><p class="step-label">Carry this forward</p><p class="transfer-copy"></p></section>
+      </div>
+    </article>
+  </template>
+
+  <script src="examples.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
