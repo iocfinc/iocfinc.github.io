@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>StoryCharts Scrollytelling Runtime · Ira Fernando</title><meta name="description" content="Modular newsroom charting and scrollytelling engine built on TOAST UI Chart and Scrollama with stateful annotations, declarative theme tokens, and standalone exports."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://iocfinc.github.io/work/storycharts-scrolly-vis/"><link rel="stylesheet" href="/_astro/about.DU5z24f8.css"></head> <body> <div class="page-shell"> <header class="site-header"> <a class="site-mark" href="/">Ira Fernando</a> <nav class="site-nav" aria-label="Primary"> <a href="/"> Home </a><a href="/writing"> Writing </a><a href="/photography"> Photography </a><a href="/work" class="active"> Work </a><a href="/about"> About </a><a href="/archive/"> Archive </a><a href="/games/concentration/"> Play </a> </nav> </header> <main>  <article class="entry-page work-page"> <header class="entry-header"> <p class="page-kicker">Work</p> <h1>StoryCharts Scrollytelling Runtime</h1> <p class="page-deck">Modular newsroom charting and scrollytelling engine built on TOAST UI Chart and Scrollama with stateful annotations, declarative theme tokens, and standalone exports.</p> <p class="entry-stamp">2026 · Frontend architecture, TypeScript package design, visual storytelling engine</p> </header> <div class="detail-rail"> <div> <p>Outcomes</p> <ul> <li>Architected a decoupled monorepo toolkit (@storycharts/core, theme, scroll, studio) enabling rapid newsroom graphic composition.</li><li>Built an interactive browser studio for CSV/JSON ingestion, field mapping, stateful highlights, and newsroom framing controls.</li><li>Enabled zero-dependency exports to standalone .html and version-controlled .storychart.json manifests.</li> </ul> </div> <div> <p>Stack</p> <ul> <li>TypeScript</li><li>TOAST UI Chart</li><li>Scrollama</li><li>Monorepo packages</li><li>Scrollytelling</li><li>Static exports</li> </ul> </div> </div> <div class="prose"> <p>Newsroom graphics teams face a constant tension between development speed and bespoke narrative craft. Generic charting libraries produce rigid, dashboard-style visuals that lack narrative timing, while custom scrollytelling articles are often built as fragile one-offs that rot quickly and resist reuse.</p>
+<p>StoryCharts resolves this tension by providing a modular, newsroom-focused charting runtime and authoring studio.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>Interactive editorial storytelling requires charts that adapt dynamically as readers scroll through prose:</p>
+<ul>
+<li><strong>Stateful Progression:</strong> Graphics must transition between states—highlighting specific series, revealing annotations, shifting focus—in sync with reader position.</li>
+<li><strong>Layout Fragility:</strong> Custom scrollytelling projects frequently break across responsive breakpoints, mobile viewports, or embedded CMS layouts.</li>
+<li><strong>Authoring Friction:</strong> Journalists and data editors often lack the time to hand-code complex DOM observers, coordinate resize loops, or wire bespoke chart themes.</li>
+</ul>
+<h2 id="the-modular-architecture">The Modular Architecture</h2>
+<p>StoryCharts is structured as a clean TypeScript monorepo with strict package boundaries:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>               ┌───────────────────────┐</span></span>
+<span class="line"><span>               │  @storycharts/studio  │ (Browser-based editor &amp; preview)</span></span>
+<span class="line"><span>               └───────────┬───────────┘</span></span>
+<span class="line"><span>                           │</span></span>
+<span class="line"><span>             ┌─────────────┴─────────────┐</span></span>
+<span class="line"><span>             ▼                           ▼</span></span>
+<span class="line"><span>   ┌────────────────────┐      ┌────────────────────┐</span></span>
+<span class="line"><span>   │ @storycharts/core  │      │ @storycharts/theme │</span></span>
+<span class="line"><span>   │ (Runtime &amp; states) │      │ (CSS design tokens)│</span></span>
+<span class="line"><span>   └─────────┬──────────┘      └────────────────────┘</span></span>
+<span class="line"><span>             │</span></span>
+<span class="line"><span>             ▼</span></span>
+<span class="line"><span>   ┌────────────────────┐</span></span>
+<span class="line"><span>   │ @storycharts/scroll│ (Scrollama IntersectionObserver)</span></span>
+<span class="line"><span>   └────────────────────┘</span></span></code></pre>
+<h3 id="1-core-runtime-storychartscore">1. Core Runtime (<code>@storycharts/core</code>)</h3>
+<p>Wraps the underlying TOAST UI Chart engine with a deterministic state machine. It manages series visibility, stateful highlight triggers, custom viewport annotations, and responsive resize debounce observers without leaking DOM implementation details.</p>
+<h3 id="2-editorial-theme-tokens-storychartstheme">2. Editorial Theme Tokens (<code>@storycharts/theme</code>)</h3>
+<p>Defines high-contrast, newsroom-ready typographic hierarchies and color palettes. Themes are implemented using pure CSS custom properties, allowing publication-wide branding, dark/light mode toggling, and accessible text contrast out of the box.</p>
+<h3 id="3-scroll-coordination-storychartsscroll">3. Scroll Coordination (<code>@storycharts/scroll</code>)</h3>
+<p>A lightweight wrapper around Scrollama and browser <code>IntersectionObserver</code> primitives. It synchronizes scroll step triggers with core chart transition states, ensuring smooth entry, pin, and exit transitions across both mobile touch screens and desktop trackpads.</p>
+<h3 id="4-authoring-studio-storychartsstudio">4. Authoring Studio (<code>@storycharts/studio</code>)</h3>
+<p>A browser-based client application enabling data journalists to:</p>
+<ul>
+<li>Ingest raw CSV and JSON tabular datasets;</li>
+<li>Configure field mappings and select chart topologies (line, area, bar, scatter);</li>
+<li>Configure editorial framing (deck, kicker, source citations, notes);</li>
+<li>Author step-by-step annotation triggers with live visual preview;</li>
+<li>Export zero-dependency standalone <code>.html</code> embeds or version-controlled <code>.storychart.json</code> project specs.</li>
+</ul>
+<h2 id="evaluation-surfaces">Evaluation Surfaces</h2>
+<p>The toolkit enforces contracts across rendering, data handling, and export fidelity:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Surface</th><th style="text-align:left">What it checks</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Data Ingestion</strong></td><td style="text-align:left">Robust parsing of CSV/JSON feeds, automatic type inference, and validation.</td></tr><tr><td style="text-align:left"><strong>State Transitions</strong></td><td style="text-align:left">Smooth interpolation between chart highlights and step-bound annotations.</td></tr><tr><td style="text-align:left"><strong>Scroll Sync</strong></td><td style="text-align:left">Jitter-free triggers across mobile touch viewports and desktop scrolling.</td></tr><tr><td style="text-align:left"><strong>Export Integrity</strong></td><td style="text-align:left">Verifies that exported standalone <code>.html</code> files render identically to studio previews.</td></tr><tr><td style="text-align:left"><strong>Responsive Adaptation</strong></td><td style="text-align:left">Graceful degradation of legends, axis labels, and tooltip overlays on narrow screens.</td></tr></tbody></table>
+<h2 id="what-this-proves">What This Proves</h2>
+<p>StoryCharts demonstrates that bespoke visual journalism does not require throwaway code:</p>
+<ul>
+<li><strong>Separation of concerns:</strong> Decoupling chart logic, thematic styling, scroll binding, and authoring tools keeps each layer simple and testable.</li>
+<li><strong>Portability:</strong> Static <code>.html</code> and JSON spec exports guarantee that graphics remain hostable on any static CDN or CMS without backend dependencies.</li>
+<li><strong>Editorial ergonomics:</strong> By lowering the barrier to entry for scrollytelling, teams can focus on narrative clarity and data accuracy.</li>
+</ul>
+<h2 id="current-limits">Current Limits</h2>
+<p>The runtime is optimized for 2D cartesian and time-series representations. Multi-dimensional spatial projections and complex hierarchical diagrams (e.g., Voronoi treemaps) still require dedicated geospatial or D3-level customization.</p> </div> </article>  </main> <footer class="site-footer"> <p>Observation as craft across systems, cities, and public thinking.</p> <a href="mailto:iraoliverfernando@gmail.com">iraoliverfernando@gmail.com</a> </footer> </div> </body></html>
