@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Large-Scale Trajectory ML &amp; Geospatial Systems · Ira Fernando</title><meta name="description" content="Engineering multi-year trajectory transition pipelines, spatial clustering across 400,000+ observations, and production ML endpoints for a regional super-app."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://iocfinc.github.io/work/trajectory-geospatial-ml/"><link rel="stylesheet" href="/_astro/about.DU5z24f8.css"></head> <body> <div class="page-shell"> <header class="site-header"> <a class="site-mark" href="/">Ira Fernando</a> <nav class="site-nav" aria-label="Primary"> <a href="/"> Home </a><a href="/writing"> Writing </a><a href="/photography"> Photography </a><a href="/work" class="active"> Work </a><a href="/about"> About </a><a href="/archive/"> Archive </a><a href="/games/concentration/"> Play </a> </nav> </header> <main>  <article class="entry-page work-page"> <header class="entry-header"> <p class="page-kicker">Work</p> <h1>Large-Scale Trajectory ML &amp; Geospatial Systems</h1> <p class="page-deck">Engineering multi-year trajectory transition pipelines, spatial clustering across 400,000+ observations, and production ML endpoints for a regional super-app.</p> <p class="entry-stamp">2024–2026 · Senior Data Scientist / Applied AI Engineer</p> </header> <div class="detail-rail"> <div> <p>Outcomes</p> <ul> <li>Designed and owned a multi-year trajectory-transition data pipeline used for ETA modeling, parking-point derivation, and segment-level evaluation.</li><li>Developed a two-stage spatial clustering workflow deriving ~9,000 parking points across ~6,000 merchants from &gt;400,000 trajectory observations.</li><li>Conducted an end-to-end parity study across 30M+ bookings comparing near-real-time and offline trajectory metrics.</li><li>Co-owned deployment and cloud-budget documentation for 4+ production ML-serving endpoints and maintained an internal library used by 5 production pipelines.</li> </ul> </div> <div> <p>Stack</p> <ul> <li>Python</li><li>Spatial clustering</li><li>Large-scale telemetry</li><li>Production ML serving</li><li>Parity evaluation</li><li>Cloud ML systems</li> </ul> </div> </div> <div class="prose"> <p>In large-scale mobility and delivery operations, physical reality is messy. GPS signals bounce off high-rise towers, driver devices experience intermittent drops, and navigation maps often fail to capture where drivers actually park or walk when picking up orders at dense commercial centres.</p>
+<p>At a regional super-app spanning mobility, delivery, maps, ETA, and operational decision-making, turning raw physical telemetry into reliable machine learning inputs was the central engineering challenge.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>Operating at scale across Southeast Asian metropolitan centres presents distinct spatial modeling hurdles:</p>
+<ul>
+<li><strong>Urban Multipath &amp; Sensor Drift:</strong> Raw trajectory streams contain severe GPS jitter, signal loss in tunnels, and positioning drift in dense commercial hubs.</li>
+<li><strong>The “Last-100-Meter” Gap:</strong> Standard map pins point to the geometric centroid of a shopping mall or merchant block, whereas the driver’s real vehicle dropoff or parking point is situated hundreds of meters away down an alley or service ramp.</li>
+<li><strong>Offline vs. Online Parity:</strong> Features computed in batch pipelines for offline training must match streaming near-real-time production features without drift or latency degradation.</li>
+</ul>
+<h2 id="the-systems-architecture">The Systems Architecture</h2>
+<p>The engineering work spanned data infrastructure, spatial modeling, and production ML serving:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>[Raw Vehicle Trajectory Streams]</span></span>
+<span class="line"><span>               │</span></span>
+<span class="line"><span>               ▼</span></span>
+<span class="line"><span>1. Trajectory-Transition Pipeline (Temporal cleaning, noise gating, map matching)</span></span>
+<span class="line"><span>               │</span></span>
+<span class="line"><span>               ▼</span></span>
+<span class="line"><span>2. Two-Stage Spatial Clustering (400,000+ observations -&gt; ~9,000 parking points)</span></span>
+<span class="line"><span>               │</span></span>
+<span class="line"><span>               ▼</span></span>
+<span class="line"><span>3. Offline / NRT Parity Engine (30M+ bookings benchmarked for drift &amp; latency)</span></span>
+<span class="line"><span>               │</span></span>
+<span class="line"><span>               ▼</span></span>
+<span class="line"><span>4. Production ML Serving &amp; Tooling (4+ endpoints, reusable library across 5 pipelines)</span></span></code></pre>
+<h3 id="1-multi-year-trajectory-transition-pipeline">1. Multi-Year Trajectory-Transition Pipeline</h3>
+<p>Designed and maintained the foundational trajectory data pipeline that processed raw GPS feeds into clean segment transitions. The pipeline applied temporal velocity filters, dead-reckoning smoothing, and map-matching algorithms to produce high-signal inputs for downstream ETA modeling, parking-point derivation, and network segment evaluations.</p>
+<h3 id="2-two-stage-spatial-clustering-for-merchant-parking-points">2. Two-Stage Spatial Clustering for Merchant Parking Points</h3>
+<p>To bridge the last-100-meter delivery friction, built a two-stage spatial clustering engine:</p>
+<ul>
+<li>Ingested over 400,000 trajectory observations surrounding dense merchant locations.</li>
+<li>First-stage density clustering isolated stationary dwelling clusters from transit segments.</li>
+<li>Second-stage geometric refinement derived approximately 9,000 precise parking and staging points across roughly 6,000 high-volume merchants.</li>
+<li>Directly reduced driver search time and improved ETA accuracy for dispatch algorithms.</li>
+</ul>
+<h3 id="3-parity-study-across-30m-bookings">3. Parity Study Across 30M+ Bookings</h3>
+<p>Engineered an exhaustive parity evaluation comparing near-real-time streaming feature calculation with historical offline batch pipelines across 30M+ bookings. The audit identified edge-case divergence in timestamp windowing, establishing automated regression tests that prevented training-serving skew before deployment.</p>
+<h3 id="4-production-serving--internal-tooling">4. Production Serving &amp; Internal Tooling</h3>
+<ul>
+<li>Co-owned the deployment, health monitoring, and cloud-budget documentation for 4+ production ML-serving endpoints.</li>
+<li>Maintained a modular internal pipeline library adopted across 5 distinct production data engineering pipelines, standardizing spatial math and data validation across teams.</li>
+</ul>
+<h2 id="evaluation-surfaces">Evaluation Surfaces</h2>
+<p>The operational and ML systems were audited against rigorous production criteria:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Surface</th><th style="text-align:left">What it checks</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Telemetry Cleaning</strong></td><td style="text-align:left">Rejection of multipath reflections, speed anomalies, and corrupted GPS records.</td></tr><tr><td style="text-align:left"><strong>Spatial Clustering</strong></td><td style="text-align:left">Stability of parking point centroids and merchant association accuracy.</td></tr><tr><td style="text-align:left"><strong>Feature Parity</strong></td><td style="text-align:left">Zero statistical drift between offline batch training sets and streaming serving tables.</td></tr><tr><td style="text-align:left"><strong>Serving Latency &amp; Budget</strong></td><td style="text-align:left">Sub-second inference latency within predefined cloud infrastructure budgets.</td></tr><tr><td style="text-align:left"><strong>Library Portability</strong></td><td style="text-align:left">API stability and backward compatibility across 5 distinct production workstreams.</td></tr></tbody></table>
+<h2 id="what-this-proves">What This Proves</h2>
+<p>This work demonstrates hands-on ownership of large-scale ML and data systems where accuracy directly impacts real-world operational economics:</p>
+<ul>
+<li><strong>Turning physical noise into structured features:</strong> Designing spatial pipelines that make ambiguous real-world telemetry actionable.</li>
+<li><strong>Enforcing offline-online parity:</strong> Ensuring that models trained in notebooks behave identically when exposed to live production streams.</li>
+<li><strong>Production discipline:</strong> Pairing algorithmic innovation with cloud cost governance, documentation, and reusable internal tooling.</li>
+</ul>
+<h2 id="current-limits">Current Limits</h2>
+<p>Dense indoor food courts and subterranean multi-level complexes remain difficult to resolve with satellite telemetry alone, requiring supplementary merchant-assisted location tagging and indoor beacon inputs.</p> </div> </article>  </main> <footer class="site-footer"> <p>Observation as craft across systems, cities, and public thinking.</p> <a href="mailto:iraoliverfernando@gmail.com">iraoliverfernando@gmail.com</a> </footer> </div> </body></html>

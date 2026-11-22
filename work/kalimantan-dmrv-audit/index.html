@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kalimantan Peatland dMRV &amp; Burn-Scar Audit · Ira Fernando</title><meta name="description" content="Sentinel-2 Level-2A digital monitoring, reporting, and verification pipeline for Central Kalimantan peatland fire disturbance with automated quality gates and cryptographic lineage manifests."><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://iocfinc.github.io/work/kalimantan-dmrv-audit/"><link rel="stylesheet" href="/_astro/about.DU5z24f8.css"></head> <body> <div class="page-shell"> <header class="site-header"> <a class="site-mark" href="/">Ira Fernando</a> <nav class="site-nav" aria-label="Primary"> <a href="/"> Home </a><a href="/writing"> Writing </a><a href="/photography"> Photography </a><a href="/work" class="active"> Work </a><a href="/about"> About </a><a href="/archive/"> Archive </a><a href="/games/concentration/"> Play </a> </nav> </header> <main>  <article class="entry-page work-page"> <header class="entry-header"> <p class="page-kicker">Work</p> <h1>Kalimantan Peatland dMRV &amp; Burn-Scar Audit</h1> <p class="page-deck">Sentinel-2 Level-2A digital monitoring, reporting, and verification pipeline for Central Kalimantan peatland fire disturbance with automated quality gates and cryptographic lineage manifests.</p> <p class="entry-stamp">2026 · Geospatial MLOps &amp; dMRV Pipeline Architecture</p> </header> <div class="detail-rail"> <div> <p>Outcomes</p> <ul> <li>Engineered an end-to-end dMRV pipeline for Central Kalimantan peatlands aligned with Verra VCS, ART TREES, and ISO 14064-2 standards.</li><li>Implemented an automated Scene Classification Layer (SCL) quality gate enforcing &gt;= 70% valid cloud/smoke-free pixel coverage before metric calculation.</li><li>Classified burn severity across Delta-NBR and Delta-NDVI in EPSG:32750 with Z &gt; 2.0 statistical disturbance anomaly alerts and SHA-256 tamper-evident manifests.</li> </ul> </div> <div> <p>Stack</p> <ul> <li>Python</li><li>STAC / xarray</li><li>Sentinel-2 L2A</li><li>dMRV &amp; MLOps</li><li>Cryptographic manifests</li><li>Geospatial analytics</li> </ul> </div> </div> <div class="prose"> <p>In Nature-based Solutions (NbS) and forest carbon crediting frameworks, wildfires represent unintentional carbon reversals. The core engineering challenge is not generating satellite map overlays; it is building a verifiable, auditable pipeline that third-party auditors can trust.</p>
+<p>When verification relies on ad hoc geospatial scripts or manual visual inspection, carbon accounting suffers from three systemic vulnerabilities: cloud/smoke occlusion errors, lack of execution determinism, and untracked analytical lineage.</p>
+<h2 id="the-problem">The Problem</h2>
+<p>Central Kalimantan contains critical peat swamp forests characterized by deep subterranean carbon deposits. During dry seasons, peat fires generate severe subterranean burn scars and persistent smoke plumes.</p>
+<p>Scaling verification across massive landscapes introduces strict technical hurdles:</p>
+<ul>
+<li><strong>Noisy Optical Telemetry:</strong> Tropical cumulus clouds, terrain shadows, and thick wildfire smoke corrupt spectral vegetation indices unless rigorously masked.</li>
+<li><strong>Reproducibility Gaps:</strong> Ad-hoc notebooks rarely enforce declarative configurations, geometric reprojections, or deterministic scene matching.</li>
+<li><strong>Auditability Demands:</strong> Validation and Verification Bodies (VVBs) operating under Verra VCS, ART TREES, or ISO 14064-2 require tamper-evident records linking reported hectare impacts directly back to raw Level-2A Earth Observation data.</li>
+</ul>
+<h2 id="the-pipeline-architecture">The Pipeline Architecture</h2>
+<p>The system replaces manual geospatial inspection with an automated, declarative dMRV workflow:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>[Declarative Config]</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>1. STAC Ingestion (Microsoft Planetary Computer Sentinel-2 L2A: B04, B08, B12, SCL)</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>2. Telemetry Quality Gate (SCL Cloud/Shadow/Smoke Masking -&gt; Assert &gt;= 70% Valid Pixels)</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>3. Spectral Burn &amp; Anomaly Engine (NBR, dNBR, dNDVI in EPSG:32750 + USGS Severity + Z &gt; 2.0 Alerts)</span></span>
+<span class="line"><span>        │</span></span>
+<span class="line"><span>        ▼</span></span>
+<span class="line"><span>4. Cryptographic Audit Trail (verification_manifest.json with SHA-256 Hashes)</span></span></code></pre>
+<h3 id="1-declarative-ingestion--alignment">1. Declarative Ingestion &amp; Alignment</h3>
+<p>The pipeline ingests Sentinel-2 Level-2A surface reflectance data via STAC queries. Temporal windows are defined declaratively to capture pre-fire baseline conditions (June–July) and post-fire disturbance assessments (October–November). Data cubes are reprojected onto a uniform 20-meter metric grid using <code>EPSG:32750</code> (UTM Zone 50S) to prevent projection distortions.</p>
+<h3 id="2-scene-classification-quality-gate">2. Scene Classification Quality Gate</h3>
+<p>Before spectral disturbance metrics are computed, the Scene Classification Layer (SCL) masks non-vegetated noise (clouds, cirrus, cloud shadows, and dense smoke). The quality gate enforces a strict invariant: if joint valid pixel coverage falls below 70%, automated reporting halts and flags the acquisition for multi-temporal compositing or human review.</p>
+<h3 id="3-spectral-indices--severity-stratification">3. Spectral Indices &amp; Severity Stratification</h3>
+<p>The analysis engine calculates the Normalized Burn Ratio (NBR) and differenced NBR (ΔNBR):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="text"><code><span class="line"><span>NBR = (B08 - B12) / (B08 + B12)</span></span>
+<span class="line"><span>ΔNBR = NBR_baseline - NBR_assessment</span></span></code></pre>
+<p>Burn scars are stratified into USGS severity tiers (<code>Low</code>, <code>Moderate-Low</code>, <code>Moderate-High</code>, <code>High</code>). Concurrently, ΔNDVI metrics track vegetation loss, while statistical <em>Z</em>-score anomaly detection (<em>Z</em> &gt; 2.0) flags abrupt localized biomass degradation for targeted VVB inspection.</p>
+<h3 id="4-tamper-evident-manifest-lineage">4. Tamper-Evident Manifest Lineage</h3>
+<p>Every pipeline execution computes SHA-256 cryptographic hashes across the declarative YAML configuration, raw STAC scene identifiers, processed raster grids, and summary hectare totals. The resulting <code>verification_manifest.json</code> provides an immutable audit trail that can be independently verified by external stakeholders.</p>
+<h2 id="evaluation-surfaces">Evaluation Surfaces</h2>
+<p>The verification suite enforces rigorous contracts across the data pipeline:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th style="text-align:left">Surface</th><th style="text-align:left">What it checks</th></tr></thead><tbody><tr><td style="text-align:left"><strong>Telemetry Quality Gate</strong></td><td style="text-align:left">Asserts joint cloud/smoke-free pixel coverage meets the ≥ 70% threshold.</td></tr><tr><td style="text-align:left"><strong>Spatial Projection</strong></td><td style="text-align:left">Enforces equal-area metric projection (<code>EPSG:32750</code>, 20m resolution) for precise hectare calculations.</td></tr><tr><td style="text-align:left"><strong>Burn Stratification</strong></td><td style="text-align:left">Validates that ΔNBR thresholding aligns with standard USGS severity classifications.</td></tr><tr><td style="text-align:left"><strong>Statistical Outlier Detection</strong></td><td style="text-align:left">Isolates extreme localized disturbances (<em>Z</em> &gt; 2.0) against regional baseline variations.</td></tr><tr><td style="text-align:left"><strong>Cryptographic Manifest</strong></td><td style="text-align:left">Confirms SHA-256 digests link processed findings deterministically to input scene telemetry.</td></tr></tbody></table>
+<h2 id="what-this-proves">What This Proves</h2>
+<p>This project demonstrates how MLOps and software engineering rigor elevate remote sensing from exploratory research into institutional infrastructure:</p>
+<ul>
+<li><strong>Quality gates prevent bad data from reaching decision-makers:</strong> Halting computation on contaminated imagery protects carbon accounting integrity.</li>
+<li><strong>Declarative pipelines replace notebook drift:</strong> All parameters, spatial bounding boxes, and temporal windows are version-controlled.</li>
+<li><strong>Cryptographic lineage builds institutional trust:</strong> VVBs can trace reported reversals to exact satellite acquisitions without trusting black-box claims.</li>
+</ul>
+<h2 id="current-limits">Current Limits</h2>
+<p>Optical sensors cannot penetrate persistent cloud cover during monsoon seasons. In high-cloud equatorial belts, operational deployments require sensor fusion with Synthetic Aperture Radar (SAR, e.g., Sentinel-1 C-band backscatter) to maintain continuous all-weather monitoring.</p> </div> </article>  </main> <footer class="site-footer"> <p>Observation as craft across systems, cities, and public thinking.</p> <a href="mailto:iraoliverfernando@gmail.com">iraoliverfernando@gmail.com</a> </footer> </div> </body></html>
